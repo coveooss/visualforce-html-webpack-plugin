@@ -19,7 +19,7 @@ var webpackConfig = {
     path: __dirname + '/dist',
     filename: 'index_bundle.js'
   },
-  plugins: [new new VisualforceHtmlPlugin(/* config */)]
+  plugins: [new VisualforceHtmlPlugin(/* config */)]
 };
 ```
 

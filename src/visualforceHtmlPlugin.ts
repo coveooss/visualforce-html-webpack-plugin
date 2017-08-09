@@ -58,7 +58,7 @@ export class VisualforceHtmlPlugin {
         });
     }
 
-    private getAllPages(): PromiseLike<string[]> {
+    private getAllPages(): Promise<string[]> {
         return new Promise<string[]>((resolve, reject) => {
             glob('**/*.page', (err, files) => {
 

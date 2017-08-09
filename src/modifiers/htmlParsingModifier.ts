@@ -1,4 +1,4 @@
-import cheerio = require('cheerio')
+import Cheerio = require('cheerio')
 import Promise = require('promise');
 import { IModifier, IAsset } from './modifier'
 
@@ -7,7 +7,7 @@ export var StringToHtmlParsingModifier: IModifier<string, Cheerio> = (asset: IAs
 
         // We need to replace the "apex:module" format since this isn't HTML complient
         asset.data = asset.data.replace(/<apex:/g, '<apex');
-        const $ = cheerio.load(asset.data, { xmlMode: true, lowerCaseTags: true });
+        const $ = Cheerio.load(asset.data, { xmlMode: true, lowerCaseTags: true });
 
         resolve({
             ...asset,

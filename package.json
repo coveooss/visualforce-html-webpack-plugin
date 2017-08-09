@@ -13,10 +13,12 @@
     "@types/glob": "^5.0.30",
     "@types/node": "^7.0.23",
     "@types/promise": "^7.1.30",
+    "ts-loader": "^2.3.2",
     "typescript": "^2.3.4"
   },
   "dependencies": {
     "glob": "^7.1.2",
-    "promise": "^7.1.1"
+    "promise": "^7.1.1",
+    "cheerio": "^1.0.0-rc.2"
   }
 }

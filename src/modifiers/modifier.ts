@@ -1,3 +1,5 @@
+import Promise = require('promise');
+
 export interface IAsset<T> {
     path: string,
     name: string,

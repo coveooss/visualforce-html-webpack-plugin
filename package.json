@@ -2,13 +2,28 @@
   "name": "visualforce-html-webpack-plugin",
   "version": "0.0.1",
   "description": "A Webpack plugin to generate HTML file from Salesforce Visualforce page",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coveo/visualforce-html-webpack-plugin.git"
+  },
+  "keywords": [
+    "coveo",
+    "visualforce",
+    "webpack",
+    "salesforce",
+    "apex"
+  ],
+  "author": "Coveo <sandbox_JSUI@coveo.com> (http://source.coveo.com/)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/coveo/visualforce-html-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/coveo/visualforce-html-webpack-plugin#readme",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@types/glob": "^5.0.30",
     "@types/node": "^7.0.23",

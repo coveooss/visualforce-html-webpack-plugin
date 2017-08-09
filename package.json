@@ -1,0 +1,22 @@
+{
+  "name": "visualforce-html-webpack-plugin",
+  "version": "0.0.1",
+  "description": "A Webpack plugin to generate HTML file from Salesforce Visualforce page",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/glob": "^5.0.30",
+    "@types/node": "^7.0.23",
+    "@types/promise": "^7.1.30",
+    "typescript": "^2.3.4"
+  },
+  "dependencies": {
+    "glob": "^7.1.2",
+    "promise": "^7.1.1"
+  }
+}

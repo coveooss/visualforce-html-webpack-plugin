@@ -1,6 +1,6 @@
 {
   "name": "visualforce-html-webpack-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Webpack plugin to generate HTML file from Salesforce Visualforce page",
   "repository": {
     "type": "git",

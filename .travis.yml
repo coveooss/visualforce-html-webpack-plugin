@@ -6,7 +6,7 @@ before_install:
   - npm install -g webpack
 
 script:
-  - webpack
+  - npm run build
 
 deploy:
   provider: npm

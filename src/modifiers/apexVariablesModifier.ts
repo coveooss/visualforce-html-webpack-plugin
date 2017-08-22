@@ -4,7 +4,6 @@ import { IModifier, IAsset } from './modifier'
 
 export var ApexVariablesModifier: IModifier<string, string> = (asset: IAsset<string>, compilation: any, controllers: { [controller: string]: any }) => {
     return new Promise<IAsset<string>>((resolve, reject) => {
-        console.log(controllers)
         if (controllers) {
             var assetData = asset.data;
             var reg = /<apex:page.*controller="([a-zA-Z0-9]*)".*>/g

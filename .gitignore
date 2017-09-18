@@ -1,2 +1,3 @@
 node_modules/
 dist/
+tests/samples-output/index.js

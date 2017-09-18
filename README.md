@@ -29,6 +29,11 @@ Since Visualforce pages can have multiple references to your Salesforce organiza
 ```javascript
 var config = {
   SalesforceContext: {
+    CustomModifiers: {
+      '<MyNameSpace:MyComponent.*?></MyNameSpace:MyComponent>': 
+      `<script  src="myscripts/mystuff.js"></script>
+      <link rel="stylesheet" href="mycss/mystuff.css"/>`
+    },
     Resources: {
       jquery: "jquery/dist/"
     },
@@ -43,3 +48,5 @@ var config = {
 ```
 
 This configuration will resolve `$Resource.jquery` and `{!foo}` in your pages allowing you to use the same `<apex:stylesheet>` and `<apex:includeScript>` imports you would in Salesforce.
+
+The CustomModifiers option allow to specify a regex to match a resource in your Visualforce page, and the content with which to replace it.

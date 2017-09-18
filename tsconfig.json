@@ -6,6 +6,7 @@
     "declaration": true,
     "module": "commonjs",
     "noImplicitThis": false,
+    "noImplicitAny": true,
     "noUnusedLocals": true,
     "strictNullChecks": true,
     "strict": true

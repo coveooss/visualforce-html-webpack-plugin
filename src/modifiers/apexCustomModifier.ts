@@ -8,10 +8,8 @@ export const ApexCustomModifier: IModifier<string, string> = (asset: IAsset<stri
     Object.keys(regexes).forEach(regexkey => {
       const reg = new RegExp(regexkey, 'g');
       const matches = reg.exec(asset.data);
-      if (matches) {
-        if (matches.length == 1) {
-          asset.data = asset.data.replace(reg, regexes[regexkey]);
-        }
+      if (matches && matches.length == 1) {
+        asset.data = asset.data.replace(reg, regexes[regexkey]);
       }
     });
 

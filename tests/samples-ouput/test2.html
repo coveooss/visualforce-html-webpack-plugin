@@ -1,0 +1,283 @@
+<html><body>
+    <c:AdminCheck>
+      <script src='jquery/dist/jquery.min.js' type='application/javascript'></script>
+      <script src='underscore/underscore-min.js' type='application/javascript'></script>
+      <script src='coveo-styleguide/dist/js/CoveoStyleGuide.Dependencies.js' type='application/javascript'></script>
+      <script src='assets/js/provisioning.bundle.js' type='application/javascript'></script>
+  
+      <link href='coveo-styleguide/dist/css/CoveoStyleGuide.css' rel='stylesheet' type='text/css' />
+      <link href='assets/css/provisioning.style.css' rel='stylesheet' type='text/css' />
+      <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"></link>
+  
+      <div id="body" class="coveo-styleguide">
+          <div id="wrapper" class="modal-backdrop closed"></div>
+          <div class="bg-white">
+              <div id="header" class="bg-medium-blue bg-polygon">
+  
+              <div id="title-section">
+                  <span id="coveo" class="text-white">coveo</span>
+                  <span id="forsalesforce" class="text-medium-grey">FOR SALESFORCE</span>
+                  <span id="setup" class="text-orange">Setup</span>
+              </div>
+  
+              <div id="version-switch-section"></div>
+  
+              </div>
+              <div id="content" class="bg-pure-white">
+  
+                  <h1 class="text-medium-blue caps bold center">CONFIGURE COVEO FOR SALESFORCE</h1>
+  
+                  <hr />
+                  <div class="center py2">
+                      <button id="btn-create" class="btn button button--ujarak caps">Create a new Coveo Organization</button>
+                      <button id="btn-link" class="btn button button--ujarak caps">Link to an existing Coveo Organization</button>
+                  </div>
+                  <div id="create-org-page" style="display: none">
+                      <h2 id="content_title" class="center caps p2">Choose a Coveo plan</h2>
+                      <div class="flex">
+                          <div id="version-boxes" class="flex mx-auto"></div>
+                          <div id="create-org" class="flex-column">
+                              <div id="create-org-name" class="box box-create spaced-box p2">
+                                  <div class="input-field form-group validate">
+                                      <input id="val-org-name" type="text" value="" required="true" />
+                                      <label data-invalid-message="You must enter an organization name.">Organization name</label>
+                                  </div>
+                              </div>
+                              <div id="create-org-sources" class="box box-create spaced-box p2">
+                                  <p class="">Select the Salesforce sources that you wish to index</p>
+                                  <div class="p1">
+                                      <label class="coveo-checkbox-label">
+                                      <input id="ck_create_std" type="checkbox" class="coveo-checkbox" value="standard" />
+                                      <button type="button"></button>
+                                      <span class="label">Salesforce standard objects</span>
+                                      </label>
+                                      <br />
+                                      <apex:outputPanel rendered="getIsKnowledge">
+                                          <label class="coveo-checkbox-label py1">
+                                          <input id="ck_create_knowledge" type="checkbox" class="coveo-checkbox" value="knowledge" />
+                                          <button type="button"></button>
+                                          <span class="label">Salesforce knowledge base</span>
+                                          </label>
+                                          <br />
+                                      </apex:outputPanel>
+                                      <label class="coveo-checkbox-label">
+                                      <input id="ck_create_content" type="checkbox" class="coveo-checkbox" value="content" />
+                                      <button type="button"></button>
+                                      <span class="label">Salesforce content</span>
+                                      </label>
+                                  </div>
+                              </div>
+                              <div id="create-org-action">
+                                  <label class="coveo-checkbox-label block right-align py2 mt1">
+                                  <input id="ck_accept_terms" type="checkbox" class="coveo-checkbox" value="accept" required="true"/>
+                                  <button type="button" ></button>
+                                  <span class="label" >I have read and agree to the <a href="https://www.coveo.com/en/support/terms-agreements" target="_blank">Terms of Service</a> and <a href="https://www.coveo.com/privacy" target="_blank">Privacy Policy</a>.</span>
+                                  </label>
+                                  <button id="btn-create-action" type="button" disabled="true" class="btn mod-primary mod-small right caps">Create</button>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="center py2">
+                          <a class="btn mod-primary caps mod-small px1" href="https://developers.coveo.com/x/JAovAg" target="_blank">Help me choose</a>
+                      </div>
+                  </div>
+              </div>
+              <div class="center mx-auto footer py2" style="margin-top: 80px">
+                  <h2 class="text-medium-blue caps bold">Additional Resources</h2>
+                  <hr />
+                  <div class="flex p2">
+                      <a href="https://www.coveo.com/go?dest=cloudhelp&lcid=9&context=2" target="_blank" class="flex-fixed-size">
+                          <div>
+                              <div class="circle-footer bg-light-grey">
+                                  <img src="assets/img/provisioning/online-help.svg" />
+                              </div>
+                              <h3 class="text-dark-blue bold py1">Online Help</h3>
+                              <p class="text-dark-blue break-word">Read our official product documentation</p>
+                          </div>
+                      </a>
+                      <a href="https://developers.coveo.com/x/KICpAQ" target="_blank" class="flex-fixed-size">
+                          <div>
+                              <div class="circle-footer  bg-light-grey">
+                                  <img src="assets/img/provisioning/developers.svg" />
+                              </div>
+                              <h3 class="text-dark-blue bold py1">Developers</h3>
+                              <p class="text-dark-blue break-word">Read the documentation from our developers</p>
+                          </div>
+                      </a>
+                      <a href="https://answers.coveo.com/" target="_blank" class="flex-fixed-size">
+                          <div>
+                              <div class="circle-footer  bg-light-grey">
+                                  <img src="assets/img/provisioning/answers.svg" />
+                              </div>
+                              <h3 class="text-dark-blue bold py1">Answers</h3>
+                              <p class="text-dark-blue break-word">Find answers from our staff on our Q&amp;A forum</p>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+          </div>
+          <button id="errorTrigger" class="js-modal-trigger" data-modal="prompt-warning" style="display:none">Prompt warning</button>
+          <div class="modal-container mod-prompt" id="prompt-warning">
+              <div class="modal-content">
+                  <header class="modal-header mod-warning">
+                      <h1>Error</h1>
+                      <span class="small-close js-modal-close">
+                          <svg width="512" height="512" viewBox="0 0 512 512" class="icon fill-pure-white">
+                              <path d="M480.002 96l-64-63.998-160 159.998-160-160-64 63.998L192.004 256l-160 159.998 64 64 160-159.998 159.994 159.994 64-64L320.003 256"></path>
+                          </svg>
+                      </span>
+                  </header>
+                  <div class="modal-body mod-header-padding">
+                      <div id="errorMesssage" class="pompt-message"></div>
+                  </div>
+                  <footer class="modal-footer">
+                      <button class="btn js-modal-close">Ok</button>
+                  </footer>
+              </div>
+          </div>
+      </div>
+      <script id="version-template" type="text/template">
+          <div class="box box-version flex-column box-version-show">
+              <div class="bg-medium-blue bg-polygon text-white center p2" style="height: 130px;background-color: <%= color %>">
+                  <h3 class="p2 text-pure-white">
+                      <%= title %>
+                  </h3>
+                  <h2 class="bold text-pure-white"><%= price %></h2>
+              </div>
+              <div class="flex-auto" style="padding-top: 15px;">
+                  <div>
+                      <% _.each(features, function(f) { %>
+                          <div class="flex p1 px2">
+                              <img class="bullet-svg p1" src='data:image/svg+xml;base64,<%= f.iconSVG %>' />
+                              <div>
+                              <p class="bold p1 text-dark-blue"><%= f.title %></p>
+                              <p class="text-medium-grey px1"><%= f.description.replace(/,/g, "<br />") %></p>
+                              </div>
+                          </div>
+                          <% }); %>
+                  </div>
+              </div>
+              <div class="bg-light-grey center p2">
+                  <button class="btn mod-small caps bg-pure-white select-version"><%= button %></button>
+              </div>
+          </div>
+      </script>
+          <script>
+          function modalHandler() {
+              var backdrop = $('.modal-backdrop');
+  
+              $('.js-modal-trigger').each(function(i, modalTrigger) {
+                  var modal = $('#' + modalTrigger.getAttribute('data-modal'));
+                  var modalPrompt = $('#' + modalTrigger.getAttribute('data-modal') + 'Prompt');
+  
+                  var closeButton = modal.find('.js-modal-close');
+                  var promptCloseButton = modalPrompt.find('.js-modal-close');
+  
+                  function removeModal() {
+                      modal.removeClass('opened');
+  
+                      backdrop.addClass('closed');
+  
+                      backdrop.off('click', removeModal);
+                  }
+  
+                  function removePrompt() {
+                      modalPrompt.removeClass('opened');
+  
+                      modal.find('.prompt-backdrop').addClass('closed');
+  
+                      backdrop.off('click', removePrompt);
+  
+                      backdrop.on('click', removeModal);
+                  }
+  
+                  $(modalTrigger).on('click', function() {
+                      modal.addClass('opened');
+  
+                      backdrop.removeClass('closed');
+  
+                      if (modalPrompt.length > 0) {
+                          modalPrompt.addClass('opened');
+  
+                          backdrop.on('click', removePrompt);
+                      } else {
+                          backdrop.on('click', removeModal);
+                      }
+                  });
+  
+                  closeButton.on('click', function(event) {
+                      event.stopPropagation();
+                      removeModal();
+                  });
+  
+                  promptCloseButton.on('click', function(event) {
+                      event.stopPropagation();
+                      removePrompt();
+                  });
+              });
+          }
+  
+          modalHandler();
+          </script>
+  
+      <script>
+          var salesforceContext = {
+          redirect_uri: "getRedirectUrl",
+          platformUri: "getPlatformUri",
+          versions: getVersionsJSON,
+          defaultOrganizationName: "$Organization.Name",
+          refreshTokenUrl: "getSalesforceRefreshTokenGuidUrl",
+          redirect_to: "$Page.GettingStarted",
+          scopes: "getScopes",
+          isSandbox: false,
+          PlatformVersion: "v2",
+          canCreateOrg: true,
+          sfdcUsername: "getSfdcUsername",
+  
+          toggleBetweenPlatforms: function toggleBetweenPlatforms(callback) {
+              Visualforce.remoting.Manager.invokeAction(
+                  '$RemoteAction.ProvisioningController.toggleBetweenPlatforms',
+                  callback
+              );
+          },
+          linkOrganization: function linkOrganization(code, callback) {
+              Visualforce.remoting.Manager.invokeAction(
+                  '$RemoteAction.ProvisioningController.linkToOrganization',
+                  code,
+                  callback
+              );
+          },
+          updateIndexlessHandshake: function updateIndexlessHandshake(callback) {
+              Visualforce.remoting.Manager.invokeAction(
+                  '$RemoteAction.ProvisioningController.updateIndexlessHandshake',
+                  callback
+              );
+          },
+          createOrganization: function createOrganization(organizationName, organizationTemplate, createStandard, createContent, createKnowledge, refreshGuid, callback) {
+              Visualforce.remoting.Manager.invokeAction(
+                  '$RemoteAction.ProvisioningController.createOrganization',
+                  organizationName,
+                  organizationTemplate,
+                  createStandard, createContent, createKnowledge,
+                  refreshGuid,
+                  callback
+              );
+          }
+          }
+  
+          window.setupPanel = new CoveoV2.ProvisioningPanel(document.getElementById("content"), salesforceContext);
+      </script>
+  
+      <script type="text/javascript">
+          try {
+          Visualforce.remoting.Manager.invokeAction(
+              '$RemoteAction.Segment.sendPage',
+              'Provisioning',
+              function() {}
+          );
+          } catch (e) {
+          console.log('Segment event not sent', e);
+          }
+      </script>
+    </c:AdminCheck>
+  </body></html>

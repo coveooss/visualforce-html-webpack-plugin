@@ -4,6 +4,10 @@
     "sourceMap": true,
     "target": "es5",
     "declaration": true,
-    "module": "commonjs"
+    "module": "commonjs",
+    "noImplicitThis": false,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "strict": true
   }
 }

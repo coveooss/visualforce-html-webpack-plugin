@@ -1,0 +1,111 @@
+<html><body>
+    <c:AdminCheck>
+      <c:ConfigurationCheck needsIndex="false">
+          <apex:form >
+            <!-- Poll platform every 5 seconds with source(s) status, and render inside panel -->
+            <apex:actionFunction name="setSourcesStatus" action="retrieveSourcesStatus}" oncomplete="onCompleteHandler({!sourcesStatus}, {!isHybrid)" reRender="pageMessages"/>
+  
+            <apex:actionFunction name="setAdvancedConfig" action="saveSettings" reRender="pageMessages">
+              <apex:param name="allowAdminFallback"  value="allowAdminFallback}" assignTo="{!allowAdminFallback"/>
+              <apex:param name="useGuestEmail"  value="useGuestEmail}" assignTo="{!useGuestEmail"/>
+              <apex:param name="obfuscateUserEmail"  value="obfuscateUserEmail}" assignTo="{!obfuscateUserEmail"/>
+            </apex:actionFunction>
+  
+            <apex:actionFunction name="resetConfiguration" action="resetConfiguration" reRender="pageMessages" />
+  
+            
+          </apex:form>
+  
+          <apex:stylesheet value="assets/legacy/css/configuration.css"/>
+          
+          <script src='jquery/dist/jquery.min.js' type='application/javascript'></script>
+          <script src='underscore/underscore-min.js' type='application/javascript'></script>
+          <apex:includeScript value="assets/js/configuration.bundle.js"/>
+          <script>
+            var configPanel;
+  
+            var onCompleteHandler = function(source, hide) {
+              configPanel.setSourceStatus(source);
+              configPanel.hideSourceStatusSection(hide);
+            }
+  
+            // Do not display the source status table if it's on premise or without any indexes.
+            var indexless = false;
+            var onPremises = IF(restApiUri != null && restApiUri != '', true, false);
+  
+            $(function () {
+                configPanel = new CoveoV2.ConfigurationPanel($('.coveo-configuration-panel'), {
+                    baseResourcesUrl: 'assets/',
+                    refreshStatus: setSourcesStatus,
+                    onSaveAdvancedConfig: setAdvancedConfig,
+                    searchPageUrl: ' JSENCODE(searchPageUri)',
+                    gettingStartedUrl: ' JSENCODE($Page.GettingStarted)',
+                    searchPageConfigurationUrl : ' JSENCODE(searchPageUri)',
+                    panelConfigurationUrl: 'http://www.coveo.com/go?dest=Cloudhelp&lcid=9&context=135',
+                    onResetConfig: resetConfiguration,
+                    indexless: indexless,
+                    onPremises: onPremises,
+                    platformUri : 'JSENCODE(getPlatformUri)'
+                })
+  
+                // Hide title if no org name is available
+                var clientCoveoOrganizationId = 'clientCoveoOrganizationId';
+                if( clientCoveoOrganizationId == "" )
+                  $('.coveo-org-title').hide();
+  
+                var allowAdminFallback = allowAdminFallback, allowAdminFallbackChoice;
+                var useGuestEmail = useGuestEmail, useGuestEmailChoice;
+                var obfuscateUserEmail = 'JSENCODE(obfuscateUserEmail)', obfuscateUserEmailChoice;
+  
+                if(allowAdminFallback) {
+                  allowAdminFallbackChoice = Coveo.Configuration.AdminFallbackChoice.ALLOW;
+                } else {
+                  allowAdminFallbackChoice = Coveo.Configuration.AdminFallbackChoice.DISALLOW;
+                }
+  
+                if(useGuestEmail) {
+                  useGuestEmailChoice = Coveo.Configuration.UserQueryProfileChoice.STANDARD;
+                } else {
+                  useGuestEmailChoice = Coveo.Configuration.UserQueryProfileChoice.ANONYMOUS;
+                }
+  
+                if (obfuscateUserEmail == 'ObfuscateAll') {
+                  obfuscateUserEmailChoice = Coveo.Configuration.UserObfuscateChoice.FULL;
+                } else if(obfuscateUserEmail == 'ObfuscatePreAt') {
+                  obfuscateUserEmailChoice = Coveo.Configuration.UserObfuscateChoice.USERNAMEONLY;
+                } else {
+                  obfuscateUserEmailChoice = Coveo.Configuration.UserObfuscateChoice.NONE;
+                }
+  
+                configPanel.setAsAlreadySelectedAdminFallback(allowAdminFallbackChoice);
+                configPanel.setAsAlreadySelectedQueryProfile(useGuestEmailChoice);
+                configPanel.setAsAlreadySelectedObfuscate(obfuscateUserEmailChoice);
+            })
+  
+          </script>
+          <div class='coveo-page-wrapper'>
+            <div class='coveo-logo-section'>
+              <div class='coveo-logo'><img src="assets/legacy/img/configuration/logo.png"/></div>
+              <div class='coveo-logo-border'></div>
+  
+              <a class="coveo-org-title" href="currentCoveoPlatformLoginUrl}" target="_blank" >Organization Id: <span>{!clientCoveoOrganizationId</span></a>
+  
+              <div class='coveo-logo-title'>COVEO FOR SALESFORCE CONFIGURATION</div>
+            </div>
+            <div class='coveo-configuration-panel'></div>
+          </div>
+  
+        <script type="text/javascript">
+          try {
+            Visualforce.remoting.Manager.invokeAction(
+                '$RemoteAction.Segment.sendPage',
+                'Configuration',
+                function() {}
+            );
+          } catch(e) {
+            console.log('Segment event not sent', e);
+          }
+        </script>
+      </c:ConfigurationCheck>
+    </c:AdminCheck>
+  </body></html>

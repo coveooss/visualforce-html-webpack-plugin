@@ -1,2 +1,2 @@
-import { VisualforceHtmlPlugin } from './visualforceHtmlPlugin'
+import { VisualforceHtmlPlugin } from './visualforceHtmlPlugin';
 export = VisualforceHtmlPlugin;

@@ -1,0 +1,7 @@
+<apex:page controller="MyController">
+
+  <CoveoV2:SearchInterface debug="true" filter="" searchHub="CommunitySearch"></CoveoV2:SearchInterface>
+
+  {!testValueFromController}
+
+</apex:page>

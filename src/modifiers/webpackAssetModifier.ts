@@ -1,6 +1,6 @@
 import { IModifier, IAsset } from './modifier';
 
-export const WebpackAssetModifier: IModifier<string, null> = (asset: IAsset<string>, compilation: any) => {
+export const WebpackAssetModifier: IModifier<string, string> = (asset: IAsset<string>, compilation: any) => {
   compilation.fileDependencies.push(asset.path);
 
   compilation.assets[asset.name + '.html'] = {
@@ -14,6 +14,6 @@ export const WebpackAssetModifier: IModifier<string, null> = (asset: IAsset<stri
 
   return {
     ...asset,
-    data: null
+    data: asset.data
   };
 };

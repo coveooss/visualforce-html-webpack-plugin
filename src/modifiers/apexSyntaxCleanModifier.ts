@@ -22,7 +22,7 @@ export const ApexSyntaxCleanModifier: IModifier<string, string> = (asset: IAsset
 
     resolve({
       ...asset,
-      data: `<html><body>${asset.data}</body></html>`
+      data: `<!DOCTYPE html>\n<html><body>${asset.data}</body></html>`
     });
   });
 };

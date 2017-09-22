@@ -35,10 +35,10 @@ export class VisualforceHtmlPlugin {
   constructor(public options: IVisualforceHtmlPluginOptions = defaultOptions) {}
 
   public apply(compiler: any) {
-    compiler.plugin('emit', (compilation: any, callback: () => void) => {
+    compiler.plugin('emit', (compilation: any, callback: (...args: any[]) => void) => {
       this.getAllPages().then(
         files => {
-          const filePromises: Promise<IAsset<null>>[] = [];
+          const filePromises: Promise<IAsset<string>>[] = [];
 
           files.forEach(f => {
             filePromises.push(

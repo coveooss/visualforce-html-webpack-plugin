@@ -1,20 +1,14 @@
 import Promise = require('promise');
-import { IModifier, IAsset } from './modifier'
+import { IModifier, IAsset } from './modifier';
 
-export var ApexResourcesModifier: IModifier<string, string> = (asset: IAsset<string>, resources: { [resource: string]: string }) => {
-    return new Promise<IAsset<string>>((resolve, reject) => {
-        if (resources) {
-            var result = asset.data;
-
-            Object.keys(resources).forEach(r => {
-                var reg = new RegExp(`\\$Resource\\.${r}`, 'g');
-                result = result.replace(reg, `'${resources[r]}'`);
-            });
-        }
-
-        resolve({
-            ...asset,
-            data: result
-        });
-    })
-}
+export const ApexResourcesModifier: IModifier<string, string> = (asset: IAsset<string>, resources: { [resource: string]: string }) => {
+  return new Promise<IAsset<string>>((resolve, reject) => {
+    if (resources) {
+      Object.keys(resources).forEach(r => {
+        const reg = new RegExp(`\\$Resource\\.${r}`, 'g');
+        asset.data = asset.data.replace(reg, `'${resources[r]}'`);
+      });
+    }
+    resolve(asset);
+  });
+};

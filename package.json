@@ -6,13 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/coveo/visualforce-html-webpack-plugin.git"
   },
-  "keywords": [
-    "coveo",
-    "visualforce",
-    "webpack",
-    "salesforce",
-    "apex"
-  ],
+  "keywords": ["coveo", "visualforce", "webpack", "salesforce", "apex"],
   "author": "Coveo <sandbox_JSUI@coveo.com> (http://source.coveo.com/)",
   "license": "Apache-2.0",
   "bugs": {
@@ -21,22 +15,28 @@
   "homepage": "https://github.com/coveo/visualforce-html-webpack-plugin#readme",
   "main": "dist/index.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "precommit": "lint-staged"
   },
-  "files": [
-    "dist",
-    "src"
-  ],
+  "lint-staged": {
+    "*.{js,ts,json}": ["prettier --write", "git add"]
+  },
+  "prettier": {
+    "printWidth": 140,
+    "singleQuote": true
+  },
+  "files": ["dist", "src"],
   "devDependencies": {
-    "@types/glob": "^5.0.30",
-    "@types/node": "^7.0.23",
-    "@types/promise": "^7.1.30",
+    "@types/glob": "^5.0.32",
+    "@types/node": "^8.0.28",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.1",
+    "prettier": "^1.7.0",
     "ts-loader": "^2.3.2",
     "typescript": "^2.3.4"
   },
   "dependencies": {
     "glob": "^7.1.2",
-    "promise": "^7.1.1",
-    "cheerio": "^1.0.0-rc.2"
+    "promise": "^7.1.1"
   }
 }

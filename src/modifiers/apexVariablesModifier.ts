@@ -1,48 +1,46 @@
 import Promise = require('promise');
 import fs = require('fs');
-import { IModifier, IAsset } from './modifier'
+import { IModifier, IAsset } from './modifier';
 
-export var ApexVariablesModifier: IModifier<string, string> = (asset: IAsset<string>, compilation: any, controllers: { [controller: string]: any }) => {
-    return new Promise<IAsset<string>>((resolve, reject) => {
-        if (controllers) {
-            var assetData = asset.data;
-            var reg = /<apex:page.*controller="([a-zA-Z0-9]*)".*>/g
-            var result = reg.exec(asset.data)
-            
-            
-            if (result) {
-                var controller = controllers[result[1]];
-                if (controller) {
-                    Object.keys(controller).forEach(variable => {
-                        reg = new RegExp(`{!.*?${variable}.*?}`, 'g');
+export const ApexVariablesModifier: IModifier<string, string> = (
+  asset: IAsset<string>,
+  compilation: any,
+  controllers: { [controller: string]: any }
+) => {
+  return new Promise<IAsset<string>>((resolve, reject) => {
+    if (controllers) {
+      let reg = /<apex:page.*controller="([a-zA-Z0-9]*)".*>/g;
+      let result = reg.exec(asset.data);
 
-                        while ((result = reg.exec(asset.data)) !== null) {
-                            var data = controller[variable];
-                            var value;
+      if (result) {
+        const controller = controllers[result[1]];
+        if (controller) {
+          Object.keys(controller).forEach(variable => {
+            reg = new RegExp(`{!.*?${variable}.*?}`, 'g');
 
-                            if (typeof data === 'object' && data.file) {
-                                try {
-                                    value = fs.readFileSync(data.file, 'UTF-8');
-                                } catch (ex) {
-                                    console.log(ex);
-                                }
+            while ((result = reg.exec(asset.data)) !== null) {
+              const data = controller[variable];
+              let value;
 
-                            } else if (typeof data === 'string') {
-                                value = data;
-                            }
-
-                            if (value) {
-                                assetData = assetData.replace(result[0], value);
-                            }
-                        }
-                    });
+              if (typeof data === 'object' && data.file) {
+                try {
+                  value = fs.readFileSync(data.file, 'UTF-8');
+                } catch (ex) {
+                  console.log(ex);
                 }
-            }
-        }
+              } else if (typeof data === 'string') {
+                value = data;
+              }
 
-        resolve({
-            ...asset,
-            data: assetData
-        });
-    })
-}
+              if (value) {
+                asset.data = asset.data.replace(result[0], value);
+              }
+            }
+          });
+        }
+      }
+    }
+
+    resolve(asset);
+  });
+};

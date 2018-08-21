@@ -12,6 +12,7 @@ import { ApexUrlforModifier } from './modifiers/apexUrlforModifier';
 import { ApexSyntaxCleanModifier } from './modifiers/apexSyntaxCleanModifier';
 import { ApexVariablesModifier } from './modifiers/apexVariablesModifier';
 import { ApexCustomModifier, ICustomModifier } from './modifiers/apexCustomModifier';
+import { Compiler } from 'webpack';
 
 export interface SalesforceContext {
   Resources: { [resource: string]: string };
@@ -34,8 +35,8 @@ export const defaultOptions: IVisualforceHtmlPluginOptions = {
 export class VisualforceHtmlPlugin {
   constructor(public options: IVisualforceHtmlPluginOptions = defaultOptions) {}
 
-  public apply(compiler: any) {
-    compiler.plugin('emit', (compilation: any, callback: (...args: any[]) => void) => {
+  public apply(compiler: Compiler) {
+    compiler.hooks.emit.tap('visualforce-html-plugin', (compilation: any, callback: (...args: any[]) => void) => {
       this.getAllPages().then(
         files => {
           const filePromises: Promise<IAsset<string>>[] = [];
